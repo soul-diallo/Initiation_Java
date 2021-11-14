@@ -1,4 +1,4 @@
-package tableau;
+package fonction;
 
 import java.util.Scanner;
 
