@@ -47,5 +47,7 @@ public class puissance_4 {
         System.out.println("==\n");
     }
 
-    static
+    static void joue (int[][] grille, int colonne, int couleur){
+
+    }
 }
