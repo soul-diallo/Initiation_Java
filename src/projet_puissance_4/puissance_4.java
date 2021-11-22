@@ -30,6 +30,29 @@ public class puissance_4 {
         } while ()
     }
 
+    static void demandeEtJoue(int[][] grille, int couleurJoeur) {
+        boolean valide;
+
+        do {
+            System.out.print("Joueur ");
+            if (couleurJoeur == JAUNE){
+                System.out.print("X");
+            }else {
+                System.out.print("O");
+            }
+            System.out.println(" : entrez un numero de colonne");
+
+            int colonne = clavier.nextInt();
+            // les indices des tableaux commencent par 0 en Java
+            --colonne;
+
+            valide = joue(grille, colonne, couleurJoeur);
+            if (!valide){
+                System.out.println(" > Ce coup n'est pas valide");
+            }
+        } while (!valide);
+    }
+
     static void initialise(int [][] grille){
         for (int i = 0; i< grille.length;i++){
             for (int j =0;j<grille[i].length;j++){
@@ -64,18 +87,22 @@ public class puissance_4 {
     }
 
     static boolean joue (int[][] grille, int colonne, int couleur){
-        int ligne = grille.length -1;
-
-        // on parcourt la colonne en partant du bas jusqu'a trouver une case vide,
-        // Si le test (ligne>=0) devient faux, c'est qu'on a soustrait 1 a ligne quand
-        // elle valait 0, ce qui arrive quand la colonne est pleine
-        while ((ligne >= 0)&& (grille[ligne][colonne] != VIDE)){
-            --ligne;
+        if (colonne >= grille[0].length){
+            return false;
         }
 
-        // si ligne >= 0, on a trouve une case vide, on la remplit,
-        // sinon c'est que la colonne est pleine et le coup n'est pas valide
-        if (ligne >=0){
+        int ligne = grille.length - 1;
+
+        boolean pleine = false;
+        while ((!pleine) && (grille[ligne][colonne] != VIDE)){
+            if (ligne == 0){
+                pleine = true;
+            }else {
+                --ligne;
+            }
+        }
+
+        if (!pleine){
             grille[ligne][colonne] = couleur;
             return true;
         }else {
