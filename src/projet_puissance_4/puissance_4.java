@@ -48,21 +48,18 @@ public class puissance_4 {
     }
 
     static boolean joue (int[][] grille, int colonne, int couleur){
-        // on parcourt la colonne en partant du bas jusqu'a trouver une case vide,
-        // ou jusqu'en haut de laa colonne si la colonne est pleine
         int ligne = grille.length -1;
 
-        boolean pleine =false;
-        while ((!pleine)&&(grille[ligne][colonne]!= VIDE)){
-            if (ligne == 0){
-                pleine = true;
-            }else {
-                --ligne;
-            }
+        // on parcourt la colonne en partant du bas jusqu'a trouver une case vide,
+        // Si le test (ligne>=0) devient faux, c'est qu'on a soustrait 1 a ligne quand
+        // elle valait 0, ce qui arrive quand la colonne est pleine
+        while ((ligne >= 0)&& (grille[ligne][colonne] != VIDE)){
+            --ligne;
         }
-        // si on n'est pas arrive jusqu'en haut de la colonne, on remplit la case vide trouvee
-        // sinon c'est que lq colonne est pleine et le coup n'est pas valide
-        if (!pleine) {
+
+        // si ligne >= 0, on a trouve une case vide, on la remplit,
+        // sinon c'est que la colonne est pleine et le coup n'est pas valide
+        if (ligne >=0){
             grille[ligne][colonne] = couleur;
             return true;
         }else {
