@@ -9,9 +9,9 @@ public class puissance_4 {
     public static void main(String[] args) {
         int [][] grille = new int[6][7];
         initialise(grille);
-        grille[2][3] = JAUNE;
-        grille[2][4] = ROUGE;
         affiche(grille);
+
+
     }
 
     static void initialise(int [][] grille){
@@ -47,7 +47,26 @@ public class puissance_4 {
         System.out.println("==\n");
     }
 
-    static void joue (int[][] grille, int colonne, int couleur){
+    static boolean joue (int[][] grille, int colonne, int couleur){
+        // on parcourt la colonne en partant du bas jusqu'a trouver une case vide,
+        // ou jusqu'en haut de laa colonne si la colonne est pleine
+        int ligne = grille.length -1;
 
+        boolean pleine =false;
+        while ((!pleine)&&(grille[ligne][colonne]!= VIDE)){
+            if (ligne == 0){
+                pleine = true;
+            }else {
+                --ligne;
+            }
+        }
+        // si on n'est pas arrive jusqu'en haut de la colonne, on remplit la case vide trouvee
+        // sinon c'est que lq colonne est pleine et le coup n'est pas valide
+        if (!pleine) {
+            grille[ligne][colonne] = couleur;
+            return true;
+        }else {
+            return false;
+        }
     }
 }
