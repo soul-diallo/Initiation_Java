@@ -46,4 +46,6 @@ public class puissance_4 {
         }
         System.out.println("==\n");
     }
+
+    static
 }
