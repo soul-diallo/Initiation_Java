@@ -1,17 +1,33 @@
 package projet_puissance_4;
 
+import java.util.Scanner;
+
 public class puissance_4 {
     // Declaration des constantes
     private final static int VIDE =0;
     private final static int JAUNE = 1;
     private final static int ROUGE = 2;
 
+    public static  Scanner clavier = new Scanner(System.in);
+
     public static void main(String[] args) {
         int [][] grille = new int[6][7];
         initialise(grille);
         affiche(grille);
 
+        int couleurJoeur = JAUNE;
 
+        do{
+            demandeEtJoue(grille,couleurJoeur);
+
+            affiche(grille);
+            // on change la couleur pour la couleur de l'autre joueur
+            if (couleurJoeur == JAUNE){
+                couleurJoeur =ROUGE;
+            }else {
+                couleurJoeur = JAUNE;
+            }
+        } while ()
     }
 
     static void initialise(int [][] grille){
