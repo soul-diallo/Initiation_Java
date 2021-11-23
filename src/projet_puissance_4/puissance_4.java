@@ -41,13 +41,22 @@ public class puissance_4 {
                 // pour chaque case qui contient un pion de la bonne couleur,
                 // on compte les pions de la meme couleur dans 4 directions
                 if (couleurCase == couleurJoueur){
+                    final int ligneMax = grille.length - 4;
+                    final int colonneMax = grille[ligne].length - 4;
+
                     if (
                             // en diagonale vers le haut et la droite
-                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
-                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
-                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
-                            (compte(grille, ligne, colonne, -1, +1) >= 4)
-                            // horizontalement, vers la droite
+                            (ligne >= 3 && colonne <= colonneMax &&
+                                    compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                                    // horizontalement, vers la droite
+                            (colonne <= colonneMax &&
+                                    compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            // en diagonale, vers le bas et la droite
+                            (ligne <= ligneMax && colonne <= colonneMax &&
+                                    compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            // verticalement, vers le bas
+                            (ligne <= ligneMax &&
+                                    compte(grille, ligne, colonne, -1, +1) >= 4)
                     ){
                         return true;
                     }
