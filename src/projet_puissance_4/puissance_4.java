@@ -15,19 +15,66 @@ public class puissance_4 {
         initialise(grille);
         affiche(grille);
 
-        int couleurJoeur = JAUNE;
+        int couleurJoueur = JAUNE;
+        boolean gagne;
 
         do{
-            demandeEtJoue(grille,couleurJoeur);
+            demandeEtJoue(grille,couleurJoueur);
 
             affiche(grille);
+
+            gagne = estCeGagne(grille, couleurJoueur);
             // on change la couleur pour la couleur de l'autre joueur
-            if (couleurJoeur == JAUNE){
-                couleurJoeur =ROUGE;
+            if (couleurJoueur == JAUNE){
+                couleurJoueur =ROUGE;
             }else {
-                couleurJoeur = JAUNE;
+                couleurJoueur = JAUNE;
             }
-        } while ()
+        } while (!gagne);
+    }
+
+    static boolean estCeGagne(int[][] grille, int couleurJoueur) {
+        for (int ligne = 0; ligne < grille.length;++ligne){
+            for (int colonne = 0; colonne< grille[ligne].length; ++colonne){
+                int couleurCase = grille[ligne][colonne];
+
+                // pour chaque case qui contient un pion de la bonne couleur,
+                // on compte les pions de la meme couleur dans 4 directions
+                if (couleurCase == couleurJoueur){
+                    if (
+                            // en diagonale vers le haut et la droite
+                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            (compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            (compte(grille, ligne, colonne, -1, +1) >= 4)
+                            // horizontalement, vers la droite
+                    ){
+                        return true;
+                    }
+                }
+            }
+        }
+        // si on a parcouru toute la grille sans trouver au moins 4 pions
+        return false;
+    }
+
+    static int compte(int[][] grille, int ligneDepart, int colonneDepart, int dirLigne, int dirColonne) {
+        int compteur = 0;
+
+        int ligne = ligneDepart;
+        int colonne = colonneDepart;
+
+        // on part de la case (ligneDepart, colonneDepart) et on parcourt la grille
+        // dans la direction donnee par (dirLigne, dirCologne)
+        while (grille[ligne][colonne] == grille[ligneDepart][colonneDepart] &&
+               ligne >= 0 && ligne < grille.length &&
+               colonne >= 0 && colonne < grille[ligne].length){
+            ++compteur;
+            ligne = ligne + dirLigne;
+            colonne = colonne + dirColonne;
+        }
+
+        return compteur;
     }
 
     static void demandeEtJoue(int[][] grille, int couleurJoeur) {
