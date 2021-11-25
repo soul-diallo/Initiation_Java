@@ -74,10 +74,10 @@ public class puissance_4 {
                             (colonne <= colonneMax &&
                                     compte(grille, ligne, colonne, 0, +1) >= 4) ||
                             // en diagonale, vers le bas et la droite
-                            (ligne <= grille.length - 4 && colonne <= grille[ligne].length - 4 &&
+                            (ligne <= ligneMax && colonne <= colonneMax &&
                                     compte(grille, ligne, colonne, +1, +1) >= 4) ||
                             // verticalement, vers le bas
-                            (ligne <= grille.length - 4 &&
+                            (ligne <= ligneMax &&
                                     compte(grille, ligne, colonne, +1, 0) >= 4)
                     ){
                         return true;
@@ -98,22 +98,26 @@ public class puissance_4 {
         // on part de la case (ligneDepart, colonneDepart) et on parcourt la grille
         // dans la direction donnee par (dirLigne, dirCologne)
         while (grille[ligne][colonne] == grille[ligneDepart][colonneDepart] &&
-               ligne >= 0 && ligne < grille.length &&
+               ligne   >= 0 && ligne   < grille.length                                                         &&
                colonne >= 0 && colonne < grille[ligne].length){
             ++compteur;
             ligne = ligne + dirLigne;
             colonne = colonne + dirColonne;
+
+            if (ligne>= 6 || colonne >= 7){
+                break;
+            }
         }
 
         return compteur;
     }
 
-    static void demandeEtJoue(int[][] grille, int couleurJoeur) {
+    static void demandeEtJoue(int[][] grille, int couleurJoueur) {
         boolean valide;
 
         do {
             System.out.print("Joueur ");
-            if (couleurJoeur == JAUNE){
+            if (couleurJoueur == JAUNE){
                 System.out.print("X");
             }else {
                 System.out.print("O");
@@ -124,7 +128,7 @@ public class puissance_4 {
             // les indices des tableaux commencent par 0 en Java
             --colonne;
 
-            valide = joue(grille, colonne, couleurJoeur);
+            valide = joue(grille, colonne, couleurJoueur);
             if (!valide){
                 System.out.println(" > Ce coup n'est pas valide");
             }
