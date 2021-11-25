@@ -72,13 +72,13 @@ public class puissance_4 {
                                     compte(grille, ligne, colonne, -1, +1) >= 4) ||
                                     // horizontalement, vers la droite
                             (colonne <= colonneMax &&
-                                    compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                                    compte(grille, ligne, colonne, 0, +1) >= 4) ||
                             // en diagonale, vers le bas et la droite
-                            (ligne <= ligneMax && colonne <= colonneMax &&
-                                    compte(grille, ligne, colonne, -1, +1) >= 4) ||
+                            (ligne <= grille.length - 4 && colonne <= grille[ligne].length - 4 &&
+                                    compte(grille, ligne, colonne, +1, +1) >= 4) ||
                             // verticalement, vers le bas
-                            (ligne <= ligneMax &&
-                                    compte(grille, ligne, colonne, -1, +1) >= 4)
+                            (ligne <= grille.length - 4 &&
+                                    compte(grille, ligne, colonne, -1, 0) >= 4)
                     ){
                         return true;
                     }
