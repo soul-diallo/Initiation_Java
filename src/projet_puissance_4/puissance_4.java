@@ -78,7 +78,7 @@ public class puissance_4 {
                                     compte(grille, ligne, colonne, +1, +1) >= 4) ||
                             // verticalement, vers le bas
                             (ligne <= grille.length - 4 &&
-                                    compte(grille, ligne, colonne, -1, 0) >= 4)
+                                    compte(grille, ligne, colonne, +1, 0) >= 4)
                     ){
                         return true;
                     }
