@@ -30,7 +30,29 @@ public class puissance_4 {
             }else {
                 couleurJoueur = JAUNE;
             }
-        } while (!gagne);
+        } while (!gagne && !plein(grille));
+
+        if (gagne){
+            // attention, on a change la couleur pour la couleur de l'autre joueur
+            if (couleurJoueur == JAUNE){
+                System.out.println("Le joueur O a gagne!");
+            }else {
+                System.out.println("Le joueur X a gagne!");
+            }
+        }else {
+            System.out.println("Match nul!");
+        }
+    }
+
+    static boolean plein(int[][] grille) {
+        // Si on trouve une case vide sur la premiere ligne, la grille n'est pas pleine
+        for (int cellule : grille[0]){
+            if (cellule == VIDE){
+                return false;
+            }
+        }
+        // Sinon, la grille est pleine
+        return true;
     }
 
     static boolean estCeGagne(int[][] grille, int couleurJoueur) {
